@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>D. Nelson's Lawn Care · Tulsa, Broken Arrow, Bixby, Jenks (concept)</title>
+<meta name="description" content="Concept redesign: licensed and insured mowing, trimming and tree trimming in Broken Arrow, Bixby, Jenks and Tulsa. Call for a quote.">
+<meta name="theme-color" content="#1f4d22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f4d22'/%3E%3Cpath d='M6 26 11 8h4l-3 18zM14 26 17 8h4l-1 18z' fill='%23a6d435'/%3E%3Cpath d='M22 26 23 8h3v18z' fill='%2363ad37'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@800&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+html,body{background:#f7f6ef;color:#1f4d22}
+:root{
+  --sky-top:#2f86d6;--sky-mid:#6cb3ea;--sky-low:#cfe7f6;
+  --grass-dark:#3f8a27;--grass-light:#63ad37;
+  --pine:#1f4d22;--pine-70:rgba(31,77,34,.74);
+  --cream:#f7f6ef;--white:#fff;
+  --lime:#a6d435;--lime-ink:#17300f;
+  --line:rgba(31,77,34,.15);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --gut:clamp(20px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font:400 18px/1.6 Outfit,"Helvetica Neue",Arial,sans-serif;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+::selection{background:rgba(166,212,53,.45)}
+.disp{font-family:Bitter,Rockwell,Georgia,serif;font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:16px 32px;border-radius:999px;font:600 16px/1 Outfit,"Helvetica Neue",Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s,background-color .2s;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn--lime{background:var(--lime);color:var(--lime-ink);box-shadow:0 10px 24px -10px rgba(23,48,15,.55)}
+.btn--lime:hover{transform:translateY(-2px);background:#b4df45}
+.btn--glass{background:rgba(23,70,30,.72);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.btn--glass:hover{background:rgba(23,70,30,.86);transform:translateY(-2px)}
+.btn--pine{background:var(--pine);color:#fff}
+.btn--pine:hover{background:#2a6330;transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.js [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease) .1s,transform .8s var(--ease) .1s}
+.js [data-reveal].is-in{opacity:1;transform:none}
+@keyframes mow{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes edge{from{stroke-dashoffset:var(--len,4000)}to{stroke-dashoffset:0}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes deck{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%)}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ribbon + header */
+.ribbon{height:34px;display:flex;align-items:center;justify-content:center;padding:0 16px;background:var(--pine);color:rgba(255,255,255,.9);font-size:13px;line-height:1.2;text-align:center}
+.hero{position:relative;height:calc(100vh - 34px);height:calc(100dvh - 34px);min-height:640px;overflow:hidden;color:#fff;background:var(--sky-mid)}
+.head{position:absolute;z-index:20;top:0;left:0;right:0;height:84px;padding:0 var(--gut);display:flex;align-items:center;justify-content:space-between;text-shadow:0 2px 14px rgba(15,50,20,.3)}
+.mark{text-decoration:none;color:#fff;display:flex;flex-direction:column;gap:5px}
+.mark b{font:800 24px/1 Bitter,Rockwell,Georgia,serif;letter-spacing:.02em}
+.mark small{font:600 11px/1 Outfit,sans-serif;letter-spacing:.28em}
+.nav{display:flex;align-items:center;gap:32px}
+.nav a.l{font-size:16px;text-decoration:none;position:relative;padding:6px 0}
+.nav a.l::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.nav a.l:hover::after{transform:scaleX(1)}
+.nav .btn{min-height:46px;padding:12px 22px;font-size:14px;text-shadow:none}
+.nav .mob{display:none}
+
+/* the CSS lawn */
+.scene{position:absolute;inset:0;overflow:hidden;z-index:0;--horizon:38%;--persp:520px}
+.sky{position:absolute;inset:0 0 var(--horizon) 0;background:linear-gradient(180deg,#2a7fd0 0%,var(--sky-top) 40%,var(--sky-mid) 80%,var(--sky-low) 100%);animation:fade .8s ease both}
+.sky::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 70% at 78% 100%,rgba(255,250,225,.45),transparent 60%)}
+.cloud{position:absolute;background:rgba(255,255,255,.35);filter:blur(24px);border-radius:999px}
+.cloud.c1{width:34vw;height:7vh;left:6%;top:22%}
+.cloud.c2{width:26vw;height:5vh;right:8%;top:12%;opacity:.8}
+.trees{position:absolute;left:0;right:0;bottom:calc(var(--horizon) - 1px);height:clamp(40px,7vh,90px);animation:fade .8s ease both}
+.trees svg{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:max(100%,1100px);height:100%;overflow:visible}
+.trees .t2{fill:#2b6a2c;opacity:.7;transform:translate(30px,8px)}
+.trees .t1{fill:var(--pine)}
+.lawn{position:absolute;left:0;right:0;bottom:0;height:var(--horizon);perspective:var(--persp);perspective-origin:50% 0%;overflow:hidden}
+.plane{position:absolute;left:-60%;right:-60%;top:0;height:calc(var(--persp) * .92);transform-origin:50% 0;transform:rotateX(72deg)}
+.dark{position:absolute;inset:0;background:var(--grass-dark);filter:url(#grass);animation:fade .6s ease .2s both}
+.light{position:absolute;inset:0;display:grid;grid-template-columns:repeat(24,1fr)}
+.light i{grid-row:1;grid-column:calc(var(--i)*2 + 2) / span 1;background:var(--grass-light);filter:url(#grass);animation:mow .9s cubic-bezier(.6,0,.3,1) both;animation-delay:calc(.45s + (var(--i) - 3)*.2s)}
+.shade{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(180deg,rgba(18,58,22,.55) 0,rgba(18,58,22,.18) 5%,rgba(207,231,246,.10) 9%,transparent 22%),
+  linear-gradient(0deg,rgba(14,44,16,.32) 0,transparent 38%),
+  radial-gradient(90% 60% at 80% 0%,rgba(255,248,210,.16),transparent 70%)}
+.edge{position:absolute;left:0;right:0;bottom:0;height:18%;width:100%;overflow:visible}
+.edge path{fill:none;stroke:#fff;stroke-width:5;opacity:.92;stroke-linecap:round;stroke-dasharray:var(--len,4000);animation:edge 1.1s ease-out 2.6s both;vector-effect:non-scaling-stroke}
+
+/* hero content */
+.hcopy{position:absolute;z-index:10;left:50%;top:calc(84px + 4vh);transform:translateX(-50%);width:min(1240px,92vw);text-align:center}
+.kick{font:600 14px/1.3 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.95);margin-bottom:18px;text-shadow:0 2px 12px rgba(15,50,20,.35);animation:rise .7s var(--ease) .2s both}
+.kick i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lime);vertical-align:middle;margin:0 .7em;position:relative;top:-2px}
+.hero h1{font-size:clamp(48px,7.6vw,132px);color:#fff;text-shadow:0 2px 0 rgba(15,50,20,.18),0 4px 30px rgba(15,50,20,.35)}
+.hero h1 span{display:block;white-space:nowrap;animation:rise .8s var(--ease) .3s both}
+.hero h1 span+span{animation-delay:.45s}
+.chip{display:inline-block;max-width:46rem;margin-top:22px;padding:12px 20px;border-radius:18px;background:rgba(20,60,30,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:300 clamp(17px,1.3vw,20px)/1.5 Outfit,sans-serif;letter-spacing:.01em;animation:rise .8s var(--ease) .7s both}
+.ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:22px}
+.ctas .btn{animation:rise .8s var(--ease) .85s both}
+.ctas .btn+.btn{animation-delay:.95s}
+
+/* sections */
+.sec{padding:clamp(88px,11vw,140px) var(--gut)}
+.wrap{max-width:1200px;margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:12px;font:600 13px/1.2 Outfit,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--pine-70);margin-bottom:22px}
+.eyebrow::before{content:"";width:24px;height:4px;border-radius:2px;background:var(--lime)}
+.h2{font-size:clamp(40px,5.4vw,80px)}
+.h2 span{display:block}
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)}
+.shead p{max-width:28rem;color:var(--pine-70);font-size:17px}
+
+/* services */
+#services{background:var(--cream)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:14px 14px 30px;transition:transform .25s var(--ease),box-shadow .25s var(--ease);display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 34px -18px rgba(31,77,34,.35)}
+.card .pic{aspect-ratio:16/10;border-radius:16px;overflow:hidden;margin-bottom:20px;position:relative;background:var(--grass-dark)}
+.card .pic img{width:100%;height:100%;object-fit:cover}
+.card .pic.mini{perspective:260px;perspective-origin:50% -10%}
+.card .pic.mini .pl{position:absolute;left:-40%;right:-40%;top:0;height:240px;transform-origin:50% 0;transform:rotateX(64deg);background:repeating-linear-gradient(90deg,var(--grass-dark) 0 12.5%,var(--grass-light) 12.5% 25%);filter:url(#grass)}
+.card .pic.mini::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,58,22,.4),transparent 30%,transparent 70%,rgba(14,44,16,.25))}
+.card .pic.mini > svg{display:none;position:absolute;z-index:2;left:50%;top:50%;width:64px;height:64px;transform:translate(-50%,-50%);color:#fff;filter:drop-shadow(0 6px 14px rgba(10,40,12,.45))}
+.ic{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;margin:0 16px 18px;background:repeating-linear-gradient(90deg,var(--grass-dark) 0 25%,var(--grass-light) 25% 50%);box-shadow:inset 0 -8px 14px rgba(14,44,16,.25)}
+.card .pic + .ic{margin-top:-50px;position:relative;z-index:2;box-shadow:0 0 0 5px #fff,inset 0 -8px 14px rgba(14,44,16,.25)}
+.ic svg{width:26px;height:26px;color:#fff}
+.card h3{font:800 22px/1.1 Bitter,Rockwell,Georgia,serif;text-transform:uppercase;margin:0 16px 10px}
+.card p{font-size:16px;line-height:1.55;color:var(--pine-70);margin:0 16px}
+.svg-i{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* before / after */
+#ba{background:var(--pine);color:#fff;position:relative;overflow:hidden}
+#ba .eyebrow{color:rgba(255,255,255,.8)}
+#ba .shead p{color:rgba(255,255,255,.8)}
+.ba{--pos:50%;position:relative;max-width:1000px;margin:0 auto;aspect-ratio:16/8;border-radius:24px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.ba .after{position:absolute;inset:0;perspective:760px;perspective-origin:50% -40%;background:var(--grass-dark);overflow:hidden}
+.ba .after .plane{height:720px;transform:rotateX(66deg);left:-50%;right:-50%}
+.ba .after .light i{animation:none}
+.ba .after .dark{animation:none}
+.ba .after::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,58,22,.35),transparent 30%),linear-gradient(0deg,rgba(10,36,12,.3),transparent 40%)}
+.ba .edge2{position:absolute;left:0;right:0;bottom:4%;width:100%;height:30%;z-index:2}
+.ba .edge2 path{fill:none;stroke:#fff;stroke-width:4;opacity:.9;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.ba .before{position:absolute;inset:0;z-index:3;clip-path:inset(0 calc(100% - var(--pos)) 0 0);background:#3d7d26;overflow:hidden}
+.ba .before .tex{position:absolute;inset:0;width:50%;height:50%;background:#468f2b;filter:url(#shaggy);transform:scale(2);transform-origin:0 0}
+.ba .before .blot{position:absolute;border-radius:50%;filter:blur(12px);transform:scale(1.5)}
+.ba .before .blot.d{background:#1f5517;opacity:.8}
+.ba .before .blot.y{background:#a9a24c;opacity:.7}
+.ba .before::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,50,18,.4),transparent 35%),linear-gradient(0deg,rgba(10,30,10,.35),transparent 45%)}
+.ba .tag{position:absolute;z-index:5;top:18px;padding:8px 14px;border-radius:999px;background:rgba(0,0,0,.3);font:600 12px/1 Outfit,sans-serif;letter-spacing:.2em;color:#fff;backdrop-filter:blur(4px)}
+.ba .tag.b{left:18px}.ba .tag.a{right:18px}
+.ba .handle{position:absolute;z-index:6;top:0;bottom:0;left:var(--pos);width:4px;margin-left:-2px;background:#fff;box-shadow:0 0 18px rgba(0,0,0,.35);pointer-events:none}
+.ba .knob{position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--pine);box-shadow:0 8px 22px rgba(0,0,0,.35);transition:transform .2s}
+.ba .knob svg{width:26px;height:26px}
+.ba input{position:absolute;z-index:7;top:0;bottom:0;left:-26px;width:calc(100% + 52px);height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;background:transparent}
+.ba input::-webkit-slider-thumb{-webkit-appearance:none;width:52px;height:100%;min-height:300px;cursor:ew-resize}
+.ba input::-moz-range-thumb{width:52px;height:100%;border:0;cursor:ew-resize}
+.ba input:focus-visible ~ .handle .knob{outline:3px solid var(--lime);outline-offset:3px}
+.ba input:active ~ .handle .knob{transform:scale(.92)}
+.bacap{max-width:1000px;margin:16px auto 0;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.bacap small{font-size:13px;color:rgba(255,255,255,.72)}
+.bg-stripes{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(100deg,rgba(255,255,255,.025) 0 90px,transparent 90px 180px)}
+
+/* why */
+#why{background:var(--cream)}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--pine)}
+.why article{padding:36px 36px 8px 0}
+.why article+article{padding-left:36px;border-left:1px solid var(--line)}
+.why .n{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.why .n span{font:800 15px/1 Bitter,serif;color:var(--pine-70);letter-spacing:.08em}
+.dot{width:46px;height:46px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:var(--pine)}
+.dot svg{width:22px;height:22px}
+.why h3{font:800 24px/1.1 Bitter,Rockwell,Georgia,serif;text-transform:uppercase;margin-bottom:12px}
+.why p{font-size:16px;color:var(--pine-70)}
+
+/* area */
+#area{background:#fff}
+.area{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.area .h2{font-size:clamp(40px,5vw,72px)}
+.towns{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 22px;padding:0;list-style:none}
+.towns li{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--lime);color:var(--lime-ink);font:600 16px/1 Outfit,sans-serif}
+.towns svg{width:16px;height:16px}
+.note{font-size:15px;color:var(--pine-70)}
+.mapcard{background:var(--cream);border-radius:24px;aspect-ratio:1/1;position:relative;overflow:hidden;border:1px solid var(--line)}
+.mapcard svg.map{position:absolute;inset:0;width:100%;height:100%}
+.mapcard .cap{position:absolute;left:20px;bottom:16px;font-size:12px;color:var(--pine-70);letter-spacing:.06em}
+.ring{stroke-dasharray:8 9}
+.ringdraw{stroke-dasharray:1200;stroke-dashoffset:0}
+.js .ringdraw{stroke-dashoffset:1200;transition:stroke-dashoffset 1.4s var(--ease)}
+.js .is-in .ringdraw{stroke-dashoffset:0}
+.mapwrap .btn{margin-top:18px}
+.town-l{font:600 15px Outfit,sans-serif;fill:var(--pine)}
+
+/* contact */
+#contact{position:relative;color:#fff;text-align:center;overflow:hidden;background:var(--pine)}
+#contact > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+#contact::before{content:"";position:absolute;inset:0;background:rgba(31,77,34,.7);z-index:1}
+#contact::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(70% 80% at 50% 50%,transparent,rgba(16,44,18,.45))}
+#contact .wrap{position:relative;z-index:2}
+#contact h2{font-size:clamp(48px,8vw,128px);text-shadow:0 4px 30px rgba(10,30,12,.35)}
+#contact h2 span{display:block}
+.rows{display:flex;justify-content:center;flex-wrap:wrap;gap:14px 34px;margin-top:48px}
+.rows a{display:inline-flex;align-items:center;gap:14px;font:600 20px/1.2 Outfit,sans-serif;text-decoration:none;padding:4px 6px 4px 4px;border-radius:999px}
+.rows a .o{width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85);display:grid;place-items:center;transition:background-color .2s,color .2s;flex:none}
+.rows a:hover .o{background:var(--lime);color:var(--lime-ink);box-shadow:none}
+.rows svg{width:20px;height:20px}
+.rows .em{overflow-wrap:anywhere}
+#contact .btn{margin-top:46px}
+
+/* footer */
+footer{background:var(--pine);color:rgba(255,255,255,.72);font-size:14px;padding:40px var(--gut);border-top:1px solid rgba(255,255,255,.1)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between}
+footer .mark b{font-size:20px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer nav a{text-decoration:none;color:rgba(255,255,255,.85)}
+footer nav a:hover{color:#fff;text-decoration:underline}
+footer .fine{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 24px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
+
+/* call bar */
+.callbar{display:none}
+@media (max-width:767px){
+  .callbar{display:flex;position:fixed;z-index:40;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));height:56px;border-radius:999px;background:var(--lime);color:var(--lime-ink);align-items:center;justify-content:center;gap:10px;font:600 16px/1 Outfit,sans-serif;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;box-shadow:0 14px 30px -10px rgba(10,30,10,.55);transition:transform .35s var(--ease),opacity .35s}
+  .callbar svg{width:20px;height:20px}
+  .js .callbar{transform:translateY(130%);opacity:0;pointer-events:none}
+  .js .callbar.on{transform:none;opacity:1;pointer-events:auto}
+  footer{padding-bottom:92px}
+}
+
+/* responsive */
+@media (max-width:1023px){
+  .scene{--horizon:40%}
+  .hcopy{top:calc(84px + 6vh)}
+  .hero h1{font-size:8.6vw}
+  .cards{grid-template-columns:1fr 1fr}
+  .area{grid-template-columns:1fr}
+  .mapwrap{max-width:560px}
+}
+@media (max-width:899px){
+  .nav a.l,.nav .desk{display:none}
+  .nav .mob{display:inline-flex}
+}
+@media (max-width:859px){
+  .why{grid-template-columns:1fr}
+  .why article,.why article+article{padding:30px 0;border-left:0;border-bottom:1px solid var(--line)}
+}
+@media (max-width:639px){
+  .scene{--horizon:44%;--persp:380px}
+  .hero .plane{left:-25%;right:-25%;transform:rotateX(66deg)}
+  .hcopy{top:calc(84px + 3vh)}
+  .hero h1{font-size:clamp(40px,11vw,56px)}
+  .hero h1 span{white-space:normal}
+  .ba{aspect-ratio:4/3}
+  .ba .after{perspective:520px}
+  .ba .after .plane{height:470px}
+  .kick i{margin:0 .45em}
+}
+@media (min-width:640px) and (max-width:1023px){.ba{aspect-ratio:16/9}}
+@media (max-width:559px){
+  .cards{grid-template-columns:1fr}
+  .ctas{flex-direction:column;align-items:stretch;max-width:420px;margin-left:auto;margin-right:auto}
+  .hero .chip{font-size:16px}
+}
+@media (max-height:720px) and (min-width:640px){
+  .hero h1{font-size:clamp(44px,6.6vw,104px)}
+  .hcopy{top:calc(84px + 3vh)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .js [data-reveal]{opacity:1;transform:none}
+  .js .ringdraw{stroke-dashoffset:0}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="grass" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="1.6 .08" numOctaves="2" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.9 .62" result="streak"/>
+      <feComposite in="streak" in2="SourceGraphic" operator="in" result="dk"/>
+      <feBlend in="SourceGraphic" in2="dk" mode="multiply"/>
+    </filter>
+    <filter id="shaggy" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".45 .12" numOctaves="3" seed="3" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 .07  0 0 0 0 .2  0 0 0 0 .05  0 0 0 -3 1.75" result="streak"/>
+      <feComposite in="streak" in2="SourceGraphic" operator="in" result="dk"/>
+      <feBlend in="SourceGraphic" in2="dk" mode="multiply"/>
+    </filter>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path class="svg-i" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect class="svg-i" x="3" y="5" width="18" height="14" rx="2"/><path class="svg-i" d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.4V21z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path class="svg-i" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle class="svg-i" cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-mower" viewBox="0 0 24 24"><path class="svg-i" d="M4 4l4 9M8 13h10a2 2 0 0 1 2 2v1H4v-1a2 2 0 0 1 2-2"/><circle class="svg-i" cx="7" cy="18.5" r="2"/><circle class="svg-i" cx="17" cy="18.5" r="2"/><path class="svg-i" d="M2.5 4h3"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle class="svg-i" cx="6" cy="6" r="3"/><circle class="svg-i" cx="6" cy="18" r="3"/><path class="svg-i" d="M8.2 8.2 20 20M8.2 15.8 20 4"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path class="svg-i" d="M12 22v-7M12 15c-4 0-7-2.6-7-6a6 6 0 0 1 4-5.6A4 4 0 0 1 16 4a5.5 5.5 0 0 1 3 5c0 3.4-3 6-7 6zM12 15l-3-3M12 13l3-3"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24"><path class="svg-i" d="M14 7 4 17a2 2 0 0 0 3 3l10-10M12 5l3-3 4 1 3 3-3 3-2-1-1 1-3-3z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path class="svg-i" d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z"/><path class="svg-i" d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect class="svg-i" x="3" y="5" width="18" height="16" rx="2"/><path class="svg-i" d="M3 10h18M8 3v4M16 3v4M8.5 15l2.2 2.2 4.8-4.4"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle class="svg-i" cx="12" cy="8" r="4"/><path class="svg-i" d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-arrows" viewBox="0 0 24 24"><path class="svg-i" d="M9 6 3 12l6 6M15 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path class="svg-i" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<div class="ribbon">Concept redesign by Jeig Torio · not the business's official website</div>
+
+<header class="hero" id="top">
+  <div class="scene" aria-hidden="true">
+    <div class="sky"><span class="cloud c1"></span><span class="cloud c2"></span></div>
+    <div class="trees">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path class="t2" d="M0 120 V70 Q40 40 80 62 T160 58 Q190 20 230 52 T310 60 Q350 34 390 56 T470 50 Q520 18 560 54 T650 62 Q690 40 730 58 T820 52 Q860 22 900 56 T990 60 Q1030 36 1070 58 T1150 50 Q1190 26 1230 54 T1320 60 Q1370 38 1440 56 V120 Z"/><path class="t1" d="M0 120 V70 Q40 40 80 62 T160 58 Q190 20 230 52 T310 60 Q350 34 390 56 T470 50 Q520 18 560 54 T650 62 Q690 40 730 58 T820 52 Q860 22 900 56 T990 60 Q1030 36 1070 58 T1150 50 Q1190 26 1230 54 T1320 60 Q1370 38 1440 56 V120 Z"/></svg>
+    </div>
+    <div class="lawn">
+      <div class="plane"><div class="dark"></div><div class="light"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i></div></div>
+      <div class="shade"></div>
+      <svg class="edge" viewBox="0 0 1440 100" preserveAspectRatio="none"><path id="edgePath" d="M-20 92 C 360 70, 1080 70, 1460 92"/></svg>
+    </div>
+  </div>
+
+  <div class="head">
+    <a class="mark" href="#top" aria-label="D. Nelson's Lawn Care, LLC, back to top"><b>D. NELSON'S</b><small>LAWN CARE, LLC</small></a>
+    <nav class="nav" aria-label="Main">
+      <a class="l" href="#services">Services</a>
+      <a class="l" href="#ba">Before &amp; after</a>
+      <a class="l" href="#area">Service area</a>
+      <a class="l" href="#contact">Contact</a>
+      <a class="btn btn--lime desk" href="tel:+19188052018"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a quote</a>
+      <a class="btn btn--lime mob" href="tel:+19188052018" aria-label="Call (918) 805-2018"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call</a>
+    </nav>
+  </div>
+
+  <div class="hcopy">
+    <p class="kick">Licensed &amp; insured<i></i>Broken Arrow<i></i>Bixby<i></i>Jenks<i></i>Tulsa</p>
+    <h1 class="disp"><span>Lawns you can</span><span>depend on.</span></h1>
+    <p class="chip">Mowing, trimming and tree trimming, licensed and insured. Call for a quote.</p>
+    <div class="ctas" id="heroCtas">
+      <a class="btn btn--lime" href="tel:+19188052018"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call (918) 805-2018</a>
+      <a class="btn btn--glass" href="#area"><svg aria-hidden="true"><use href="#i-pin"/></svg>See the service area</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="services" aria-labelledby="s-h">
+    <div class="wrap">
+      <div class="shead" data-reveal>
+        <div>
+          <p class="eyebrow">What we do</p>
+          <h2 class="disp h2" id="s-h"><span>A yard you're</span><span>proud of.</span></h2>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card" data-reveal>
+          <div class="pic mini" aria-hidden="true"><div class="pl"></div><svg><use href="#i-mower"/></svg></div>
+          <div class="ic" aria-hidden="true"><svg><use href="#i-mower"/></svg></div>
+          <h3>Mowing</h3>
+          <p>Regular mowing that leaves clean, even lines.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="pic"><img src="assets/edge-macro.webp" width="1000" height="750" loading="lazy" alt="A crisp lawn edge along a concrete border and paved path" style="object-position:55% 50%"></div>
+          <div class="ic" aria-hidden="true"><svg><use href="#i-scissors"/></svg></div>
+          <h3>Trimming</h3>
+          <p>Trimming around beds, fences and edges for a finished look.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="pic"><img src="assets/tree-trim.webp" width="1000" height="840" loading="lazy" alt="Long-handled loppers leaning against a tree trunk beside cut branches" style="object-position:40% 45%"></div>
+          <div class="ic" aria-hidden="true"><svg><use href="#i-tree"/></svg></div>
+          <h3>Tree trimming</h3>
+          <p>Overgrown branches cut back and tidied.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="pic mini" aria-hidden="true"><div class="pl"></div><svg><use href="#i-hammer"/></svg></div>
+          <div class="ic" aria-hidden="true"><svg><use href="#i-hammer"/></svg></div>
+          <h3>Handyman help</h3>
+          <p>Need a hand with small jobs around the house? Ask: the owner does handyman work too.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="ba" aria-labelledby="ba-h">
+    <div class="bg-stripes" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative">
+      <div class="shead" data-reveal>
+        <div>
+          <p class="eyebrow">Before &amp; after</p>
+          <h2 class="disp h2" id="ba-h"><span>Drag to</span><span>mow.</span></h2>
+        </div>
+        <p>Slide to see the difference. Real before-and-after photos are posted on the D. Nelson's Facebook page.</p>
+      </div>
+      <div class="ba" id="ba-slider" data-reveal>
+        <div class="after" aria-hidden="true">
+          <div class="plane"><div class="dark"></div><div class="light"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i></div></div>
+          <svg class="edge2" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M-20 88 C 250 66, 750 66, 1020 88"/></svg>
+        </div>
+        <div class="before" aria-hidden="true">
+          <div class="tex"></div>
+          <span class="blot d" style="left:4%;top:8%;width:90px;height:60px"></span>
+          <span class="blot d" style="left:22%;top:30%;width:70px;height:46px"></span>
+          <span class="blot d" style="left:38%;top:12%;width:84px;height:52px"></span>
+          <span class="blot d" style="left:12%;top:58%;width:90px;height:64px"></span>
+          <span class="blot d" style="left:46%;top:52%;width:60px;height:44px"></span>
+          <span class="blot d" style="left:30%;top:78%;width:88px;height:56px"></span>
+          <span class="blot d" style="left:62%;top:24%;width:76px;height:50px"></span>
+          <span class="blot d" style="left:70%;top:64%;width:90px;height:60px"></span>
+          <span class="blot d" style="left:84%;top:10%;width:66px;height:44px"></span>
+          <span class="blot d" style="left:88%;top:44%;width:80px;height:58px"></span>
+          <span class="blot d" style="left:56%;top:84%;width:72px;height:48px"></span>
+          <span class="blot d" style="left:2%;top:86%;width:60px;height:40px"></span>
+          <span class="blot y" style="left:28%;top:46%;width:120px;height:52px"></span>
+          <span class="blot y" style="left:8%;top:30%;width:80px;height:36px"></span>
+          <span class="blot y" style="left:52%;top:34%;width:110px;height:44px"></span>
+          <span class="blot y" style="left:76%;top:80%;width:130px;height:50px"></span>
+        </div>
+        <span class="tag b" aria-hidden="true">BEFORE</span>
+        <span class="tag a" aria-hidden="true">AFTER</span>
+        <input type="range" min="0" max="100" value="50" step="1" aria-label="Before and after comparison" id="ba-range">
+        <div class="handle" aria-hidden="true"><span class="knob"><svg><use href="#i-arrows"/></svg></span></div>
+      </div>
+      <div class="bacap">
+        <small>Illustration, not a photo of a customer's yard.</small>
+        <a class="btn btn--lime" href="https://www.facebook.com/DNelsonsLawnCare" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg>See real photos on Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="why" aria-labelledby="w-h">
+    <div class="wrap">
+      <div class="shead" data-reveal>
+        <div>
+          <p class="eyebrow">Why D. Nelson's</p>
+          <h2 class="disp h2" id="w-h"><span>A service you</span><span>can depend on.</span></h2>
+        </div>
+      </div>
+      <div class="why">
+        <article data-reveal>
+          <div class="n"><span class="dot" aria-hidden="true"><svg><use href="#i-shield"/></svg></span><span>01</span></div>
+          <h3>Licensed &amp; insured</h3>
+          <p>Fully licensed and insured, in their own words. Ask for proof any time.</p>
+        </article>
+        <article data-reveal>
+          <div class="n"><span class="dot" aria-hidden="true"><svg><use href="#i-cal"/></svg></span><span>02</span></div>
+          <h3>Dependable</h3>
+          <p>Their promise: a lawn care service you can depend on.</p>
+        </article>
+        <article data-reveal>
+          <div class="n"><span class="dot" aria-hidden="true"><svg><use href="#i-person"/></svg></span><span>03</span></div>
+          <h3>Owner on the job</h3>
+          <p>Customers mention the owner by name for how hard he works.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="area" aria-labelledby="a-h">
+    <div class="wrap area">
+      <div data-reveal>
+        <p class="eyebrow">Service area</p>
+        <h2 class="disp h2" id="a-h"><span>Broken Arrow</span><span>to Tulsa.</span></h2>
+        <ul class="towns">
+          <li><svg aria-hidden="true"><use href="#i-pin"/></svg>Broken Arrow</li>
+          <li><svg aria-hidden="true"><use href="#i-pin"/></svg>Bixby</li>
+          <li><svg aria-hidden="true"><use href="#i-pin"/></svg>Jenks</li>
+          <li><svg aria-hidden="true"><use href="#i-pin"/></svg>Tulsa</li>
+        </ul>
+        <p class="note">Not sure if your street is covered? Call and ask.</p>
+      </div>
+      <div class="mapwrap" data-reveal>
+        <div class="mapcard">
+          <svg class="map" viewBox="0 0 500 500" role="img" aria-label="Simple sketch of the service area: Tulsa, Broken Arrow, Jenks and Bixby, not to scale">
+            <defs>
+              <clipPath id="disc"><circle cx="250" cy="245" r="182"/></clipPath>
+              <pattern id="mstripe" width="56" height="56" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><rect width="56" height="56" fill="#63ad37"/><rect width="28" height="56" fill="#58a231"/></pattern>
+            </defs>
+            <g clip-path="url(#disc)" opacity=".38"><rect width="500" height="500" fill="url(#mstripe)"/></g>
+            <circle cx="250" cy="245" r="182" fill="none" stroke="rgba(31,77,34,.12)" stroke-width="1"/>
+            <path d="M40 120 C 140 150, 170 230, 150 300 S 200 420, 300 470" fill="none" stroke="rgba(47,134,214,.35)" stroke-width="10" stroke-linecap="round"/>
+            <g fill="none" stroke="#1f4d22" stroke-width="2.5" stroke-linecap="round">
+              <path class="ringdraw" d="M150 150 C 230 110, 360 150, 380 230 C 400 310, 330 380, 260 372 C 190 364, 130 320, 140 260 C 145 205, 140 170, 150 150 Z" pathLength="1200"/>
+            </g>
+            <g>
+              <circle cx="150" cy="150" r="11" fill="#1f4d22"/><circle cx="150" cy="150" r="4.5" fill="#a6d435"/>
+              <text class="town-l" x="112" y="128">Tulsa</text>
+              <circle cx="380" cy="230" r="11" fill="#1f4d22"/><circle cx="380" cy="230" r="4.5" fill="#a6d435"/>
+              <text class="town-l" x="364" y="268" text-anchor="end">Broken Arrow</text>
+              <circle cx="140" cy="300" r="11" fill="#1f4d22"/><circle cx="140" cy="300" r="4.5" fill="#a6d435"/>
+              <text class="town-l" x="72" y="305">Jenks</text>
+              <circle cx="260" cy="372" r="11" fill="#1f4d22"/><circle cx="260" cy="372" r="4.5" fill="#a6d435"/>
+              <text class="town-l" x="278" y="398">Bixby</text>
+            </g>
+            <g fill="none" stroke="#1f4d22" stroke-width="1.5" opacity=".5" transform="translate(440 52)"><path d="M0 -18 L6 0 L0 -4 L-6 0 Z" fill="#1f4d22"/><text x="-4.5" y="16" font-size="12" font-family="Outfit,sans-serif" fill="#1f4d22" stroke="none">N</text></g>
+          </svg>
+          <span class="cap">Not to scale</span>
+        </div>
+        <a class="btn btn--pine" href="https://www.google.com/maps/search/?api=1&amp;query=D.+Nelson%27s+Lawn+Care+Tulsa+OK" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Open in Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact" aria-labelledby="c-h">
+    <img src="assets/striped-lawn.webp" width="1600" height="430" loading="lazy" alt="">
+    <div class="wrap">
+      <h2 class="disp" id="c-h" data-reveal><span>Let's get</span><span>your yard striped.</span></h2>
+      <div class="rows" data-reveal>
+        <a href="tel:+19188052018"><span class="o" aria-hidden="true"><svg><use href="#i-phone"/></svg></span>(918) 805-2018</a>
+        <a href="mailto:dnelsonslawncare@gmail.com"><span class="o" aria-hidden="true"><svg><use href="#i-mail"/></svg></span><span class="em">dnelsonslawncare@gmail.com</span></a>
+        <a href="https://www.facebook.com/DNelsonsLawnCare" target="_blank" rel="noopener"><span class="o" aria-hidden="true"><svg><use href="#i-fb"/></svg></span>Facebook</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="mark" href="#top"><b>D. NELSON'S</b><small>LAWN CARE, LLC</small></a>
+    <nav aria-label="Footer">
+      <a href="#services">Services</a><a href="#ba">Before &amp; after</a><a href="#why">Why us</a><a href="#area">Service area</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="fine">
+      <span>Concept redesign by Jeig Torio · not the business's official website</span>
+      <span>Lawn scenes are CSS illustrations; photos are stock concept placeholders.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="callbar" id="callbar" href="tel:+19188052018"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call for a quote</a>
+
+<script>
+(function(){
+  var d=document, root=d.documentElement;
+  root.classList.add('js');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // edge line length
+  var ep=d.getElementById('edgePath');
+  if(ep&&ep.getTotalLength){var sv=ep.ownerSVGElement,k=Math.max(sv.clientWidth/1440,1);var L=Math.ceil(ep.getTotalLength()*k)+40;ep.style.setProperty('--len',L);}
+
+  // reveals
+  var els=[].slice.call(d.querySelectorAll('[data-reveal]'));
+  function show(e){e.classList.add('is-in');}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){show(en.target);io.unobserve(en.target);}});},{threshold:.2});
+    els.forEach(function(e){io.observe(e);});
+  } else els.forEach(show);
+  setTimeout(function(){els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<innerHeight)show(e);});},2500);
+
+  // before / after
+  var box=d.getElementById('ba-slider'), range=d.getElementById('ba-range'), touched=false;
+  function setPos(v){box.style.setProperty('--pos',v+'%');}
+  if(box&&range){
+    range.addEventListener('input',function(){touched=true;setPos(range.value);});
+    setPos(range.value);
+    if(!reduce&&'IntersectionObserver' in window){
+      var ho=new IntersectionObserver(function(es){
+        if(!es[0].isIntersecting)return; ho.disconnect();
+        setTimeout(function(){
+          if(touched)return;
+          var t0=null,dur=1600;
+          function f(t){ if(touched)return; if(!t0)t0=t; var p=Math.min((t-t0)/dur,1);
+            var e=p<.5?(1-Math.cos(p*2*Math.PI))/2:(1-Math.cos(p*2*Math.PI))/2; // 0→1→0
+            var v=50-30*e; setPos(v.toFixed(2)); range.value=Math.round(v);
+            if(p<1)requestAnimationFrame(f); else {setPos(50);range.value=50;} }
+          requestAnimationFrame(f);
+        },300);
+      },{threshold:.5});
+      ho.observe(box);
+    }
+  }
+
+  // mobile call bar
+  var bar=d.getElementById('callbar'), ctas=d.getElementById('heroCtas');
+  if(bar&&ctas&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){bar.classList.toggle('on',!es[0].isIntersecting);}).observe(ctas);
+  } else if(bar) bar.classList.add('on');
+})();
+</script>
+</body>
+</html>
